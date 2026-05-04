@@ -127,10 +127,15 @@ def get_stats():
     from collections import Counter
 
     packets = read_all_packets()
-    total = len(packets)
-    tcp   = sum(1 for p in packets if p.get("protocol") == "TCP")
-    udp   = sum(1 for p in packets if p.get("protocol") == "UDP")
-    icmp  = sum(1 for p in packets if p.get("protocol") == "ICMP")
+    total  = len(packets)
+    tcp    = sum(1 for p in packets if p.get("protocol") == "TCP")
+    udp    = sum(1 for p in packets if p.get("protocol") == "UDP")
+    icmp   = sum(1 for p in packets if p.get("protocol") == "ICMP")
+    tcp6   = sum(1 for p in packets if p.get("protocol") == "TCP6")
+    udp6   = sum(1 for p in packets if p.get("protocol") == "UDP6")
+    icmpv6 = sum(1 for p in packets if p.get("protocol") == "ICMPv6")
+    arp    = sum(1 for p in packets if p.get("protocol") == "ARP")
+    raw    = sum(1 for p in packets if p.get("protocol") == "RAW")
     sizes = [p.get("size", 0) for p in packets]
     avg   = sum(sizes) / total if total > 0 else 0
     total_bytes = sum(sizes)
@@ -168,6 +173,11 @@ def get_stats():
         "tcp":           tcp,
         "udp":           udp,
         "icmp":          icmp,
+        "tcp6":          tcp6,
+        "udp6":          udp6,
+        "icmpv6":        icmpv6,
+        "arp":           arp,
+        "raw":           raw,
         "avg_size":      round(avg, 1),
         "total_bytes":   total_bytes,
         "top_service":   top_service_name,
