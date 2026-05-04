@@ -54,8 +54,8 @@ pip install flask flask-cors
 
 ### 1. Build the sniffer (skip if you have `sniffer.exe`)
 ```bash
-# With MSVC (adjust paths to your Npcap SDK)
-cl sniffer.cpp /I"C:\npcap-sdk\Include" /link /LIBPATH:"C:\npcap-sdk\Lib\x64" wpcap.lib ws2_32.lib
+# With MinGW (adjust paths to your Npcap SDK)
+g++ sniffer.cpp -o sniffer -I C:/npcap-sdk/Include -L C:/npcap-sdk/Lib/x64 -lwpcap -lws2_32
 ```
 
 ### 2. Start the Flask API
